@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Assistant de Swing Trading IA</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            line-height: 1.7; 
+            margin: 0; 
+            padding: 20px; 
+            background-color: #f8f9fa; 
+            color: #343a40; 
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 20px auto; 
+            padding: 25px 35px; 
+            background-color: #ffffff; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+        }
+        h1, h2, h3, h4, h5 { 
+            color: #0056b3; 
+            font-weight: 600;
+        }
+        h1 { 
+            font-size: 2.4em; 
+            text-align: center; 
+            margin-bottom: 20px;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 15px;
+        }
+        h2 { 
+            border-bottom: 1px solid #dee2e6; 
+            padding-bottom: 10px; 
+            margin-top: 40px; 
+        }
+        h4 { color: #17a2b8; }
+        h5 { color: #28a745; margin-bottom: 5px; }
+        code { 
+            background-color: #e9ecef; 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.9em;
+            color: #c7254e;
+            border: 1px solid #dee2e6;
+        }
+        pre code {
+            display: block;
+            padding: 15px;
+            color: #f8f9fa;
+            background-color: #343a40;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .highlight { color: #007bff; font-weight: bold; }
+        .workflow-step, .rl-card { 
+            border-left: 4px solid #007bff; 
+            padding-left: 25px; 
+            margin: 30px 0; 
+        }
+        .rl-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .diagram-box {
+            border: 2px solid #0056b3;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            background-color: #f0f7ff;
+            flex-grow: 1;
+        }
+        .diagram-brain { flex-basis: 35%; background-color: #e2f0d9;}
+        .diagram-arrow {
+            font-size: 2.5em;
+            color: #6c757d;
+            font-weight: bold;
+            text-align: center;
+            flex-grow: 0.5;
+        }
+        .disclaimer {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        footer { 
+            text-align: center; 
+            margin-top: 40px; 
+            padding-top: 20px; 
+            border-top: 1px solid #e9ecef; 
+            font-size: 0.9em; 
+            color: #6c757d; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assistant d'Aide à la Décision pour le Swing Trading</h1>
+        <p>Ce projet n'est pas un bot de trading automatique. C'est un <span class="highlight">assistant personnel</span> conçu pour vous aider à prendre des décisions de swing trading manuel. Il identifie les opportunités et vous donne des signaux, mais la décision finale et l'exécution de l'ordre vous appartiennent.</p>
+
+        <h2>Installation et Mise en Place</h2>
+        <div class="workflow-step">
+            <h3>Étape 0 : Prérequis</h3>
+            <p>Assurez-vous que <strong>Python</strong> est installé sur votre machine (version 3.8 ou supérieure). Vous pouvez le télécharger depuis <a href="https://www.python.org/downloads/" target="_blank">python.org</a>. Lors de l'installation, cochez la case "Add Python to PATH".</p>
+        </div>
+        <div class="workflow-step">
+            <h3>Étape 1 : Obtenir les fichiers du projet</h3>
+            <p>Créez un dossier principal pour le projet (par exemple, <code>swing-trader-ia</code>) et placez-y tous les fichiers fournis : <code>main.py</code>, <code>requirements.txt</code>, et le dossier <code>src</code> avec tout son contenu.</p>
+        </div>
+        <div class="workflow-step">
+            <h3>Étape 2 : Installer les dépendances</h3>
+            <p>Ouvrez votre terminal (ou 'Invite de commandes' sur Windows) et naviguez jusqu'au dossier du projet.</p>
+            <pre><code>cd chemin/vers/votre/dossier/swing-trader-ia</code></pre>
+            <p>Il est fortement recommandé d'utiliser un <strong>environnement virtuel</strong>.</p>
+            <pre><code>python -m venv venv
+# Sur Windows: venv\Scripts\activate | Sur macOS/Linux: source venv/bin/activate</code></pre>
+            <p>Installez toutes les bibliothèques nécessaires en une seule commande.</p>
+            <pre><code>pip install -r requirements.txt --upgrade</code></pre>
+            <p>Le programme est maintenant prêt à être utilisé !</p>
+        </div>
+        
+        <h2>Le Workflow d'Utilisation Recommandé</h2>
+        <div class="workflow-step">
+            <h3>Routine 1 : Le Scan du Matin (Début de journée)</h3>
+            <pre><code>python main.py scan</code></pre>
+            <p>Trouve le <span class="highlight">Top 5</span> des opportunités du jour et les sauvegarde dans <code>daily_candidates.txt</code>.</p>
+        </div>
+        <div class="workflow-step">
+            <h3>Routine 2 : L'Entraînement Ciblé (Juste après le scan)</h3>
+            <pre><code>python main.py train</code></pre>
+            <p>Entraîne les modèles IA <span class="highlight">uniquement pour les 5 candidats du jour</span>. C'est rapide et efficace.</p>
+        </div>
+        <div class="workflow-step">
+            <h3>Routine 3 : Le Conseil en Cours de Journée (À tout moment)</h3>
+            <pre><code>python main.py advise</code></pre>
+            <p>Donne un conseil pour chaque candidat du jour, en utilisant les modèles fraîchement entraînés.</p>
+        </div>
+        <div class="workflow-step">
+            <h3>Tâche Optionnelle : L'Entraînement de Fond (Hebdomadaire)</h3>
+            <p>De temps en temps (par exemple, le week-end), vous pouvez lancer un entraînement complet pour vous assurer que tous les modèles, même ceux qui ne sont pas dans le top 5, sont à jour.</p>
+             <pre><code>python main.py train --all</code></pre>
+        </div>
+        
+        <h2>Personnalisation : Devenez le Chef d'Orchestre</h2>
+        <p>L'intelligence du programme dépend des actifs que vous lui demandez de surveiller. Vous avez le contrôle total sur cette liste (la "watchlist").</p>
+        <ol>
+            <li>Ouvrez le fichier <code>src/investment_selector.py</code>.</li>
+            <li>Localisez la liste <code>XTB_ASSETS</code>.</li>
+            <li>Modifiez cette liste en ajoutant ou en supprimant des tickers pour qu'elle corresponde aux marchés qui vous intéressent.</li>
+        </ol>
+        <p><strong>Astuce :</strong> Pour trouver le bon ticker pour un actif, cherchez sur Google "Nom de l'action Yahoo Finance".</p>
+        
+
+        <h2>Plongée au Cœur du Projet : L'Apprentissage par Renforcement (RL)</h2>
+        <p>Comment l'IA apprend-elle à trader ? Elle utilise une technique appelée Apprentissage par Renforcement. Le meilleur moyen de le comprendre est d'imaginer que l'on entraîne une IA à jouer à un jeu vidéo dont le but est de maximiser le score (la valeur du portefeuille). L'IA joue à ce jeu des dizaines de milliers de fois sur les données historiques.</p>
+
+        <h3>Architecture Détaillée de l'IA (PPO)</h3>
+        <p>Le "cerveau" de notre IA est un modèle PPO (Proximal Policy Optimization) avec une politique "MlpPolicy". Cela signifie qu'il est composé d'un réseau de neurones (Multi-Layer Perceptron). Ce réseau a une architecture "Acteur-Critique" : il a deux têtes de sortie qui travaillent en tandem.</p>
+        
+        <div class="rl-diagram">
+            <div class="diagram-box">
+                <h5>1. Entrée (Observation)</h5>
+                <p>État actuel du marché et du portefeuille.</p>
+            </div>
+            <div class="diagram-arrow">→</div>
+            <div class="diagram-box diagram-brain">
+                <h5>2. Cerveau de l'IA (Réseau de Neurones)</h5>
+                <p><strong>Couches de Neurones Cachées</strong><br><em>(Analyse des patterns)</em></p>
+                <hr>
+                <p><strong>Tête 1 : L'Acteur (Politique)</strong><br><em>Décide : "Quelle action faire ?"</em></p>
+                <p><strong>Tête 2 : Le Critique (Valeur)</strong><br><em>Estime : "Cette situation est-elle bonne ?"</em></p>
+            </div>
+            <div class="diagram-arrow">→</div>
+            <div class="diagram-box">
+                <h5>3. Sortie (Décision)</h5>
+                <p>L'action la plus probable (Acheter, Vendre ou Conserver).</p>
+            </div>
+        </div>
+        
+        <ul>
+            <li><strong>L'Acteur</strong> est la partie qui choisit l'action concrète (ACHETER, VENDRE, CONSERVER).</li>
+            <li><strong>Le Critique</strong> évalue la situation actuelle. Il aide l'Acteur en lui disant si les choix qu'il fait dans une situation donnée mènent à de bonnes ou de mauvaises récompenses sur le long terme.</li>
+        </ul>
+        <p>Pendant l'entraînement, l'algorithme PPO utilise les estimations du Critique pour guider l'Acteur à prendre de meilleures décisions, de manière stable et progressive.</p>
+
+        <h3>Exemple Concret : Une Décision en une Fraction de Seconde</h3>
+        <p>Imaginons que nous sommes le matin et que le `scan` a identifié NVDA comme une opportunité. Vous lancez `advise`.</p>
+        
+        <div class="rl-card" style="border-left-color: #28a745;">
+            <h4>La Situation</h4>
+            <p>Le programme récupère les dernières données pour NVDA et voit que le prix est en hausse, le volume est important, le RSI est à 65 (fort mais pas encore sur-acheté). Votre portefeuille pour cet actif est vide (solde de 10 000€, 0 action détenue).</p>
+            
+            <h4>L'Observation (Entrée)</h4>
+            <p>Toutes ces informations sont converties en un simple tableau de nombres (un `array` Numpy) qui est présenté au "cerveau" :</p>
+            <pre><code># Ce qui est envoyé au modèle model.predict()
+[
+  130.5,    // Prix de Clôture
+  125.2,    // Moyenne Mobile 10j
+  118.1,    // Moyenne Mobile 30j
+  110.4,    // Moyenne Mobile 50j
+  65.3,     // RSI 14j
+  10000.0,  // Solde du portefeuille
+  0.0       // Actions détenues
+]</code></pre>
+
+            <h4>La Prédiction (Sortie)</h4>
+            <p>Le réseau de neurones analyse ce tableau en une fraction de seconde. Sa tête "Acteur", conditionnée par des milliers d'entraînements, détermine que dans une telle situation, l'action qui a le plus souvent mené à une récompense positive est "ACHETER". Il retourne un simple chiffre :</p>
+            <pre><code>2</code></pre>
+            <p>Le programme interprète ce chiffre (0=Vendre, 1=Conserver, 2=Acheter) et vous affiche le conseil final : <span class="highlight">Conseil pour NVDA : **ACHETER**</span>.</p>
+        </div>
+
+        <footer>
+            <div class="disclaimer">
+                <strong>Avertissement :</strong> Le trading comporte des risques importants de perte en capital. Ce projet est un outil d'aide à la décision à but éducatif et ne garantit aucun profit. Utilisez-le comme un second avis, pas comme une certitude. Testez toujours vos stratégies en démo avant d'engager des fonds réels.
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

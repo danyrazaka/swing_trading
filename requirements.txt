@@ -1,0 +1,8 @@
+pandas
+numpy<2.0  # MODIFIÉ : On bloque la version de numpy
+yfinance
+stable-baselines3[extra]
+gymnasium
+argparse
+pandas-ta>=0.3.14b0
+python-telegram-bot
