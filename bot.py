@@ -11,7 +11,7 @@ from src.trading_advisor import get_advice
 
 # --- Configuration ---
 # Obtenez ce token en parlant à "BotFather" sur Telegram
-TELEGRAM_TOKEN = "VOTRE_TOKEN_TELEGRAM_ICI" 
+TELEGRAM_TOKEN = "8452245003:AAHO9KRyU7LSnhQI-QApPUI9juDA4zEH9f0" 
 CANDIDATES_FILE = "daily_candidates.txt"
 
 # Configuration du logging pour voir les erreurs
